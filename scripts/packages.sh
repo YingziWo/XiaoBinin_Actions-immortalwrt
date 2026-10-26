@@ -10,6 +10,7 @@ rm -rf feeds/luci/applications/{luci-app-mosdns,luci-app-passwall}
 #克隆依赖插件
 git clone --depth 1 https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git package/pwpage
 git clone --depth 1 https://github.com/sbwml/packages_lang_golang -b 27.x feeds/packages/lang/golang
+git clone --depth 1 https://github.com/acmel/dwarves -b v1.30 feeds/packages/dwarves                      #for vmlinux-btf依赖
 
 #克隆的源码放在small文件夹
 mkdir package/small
@@ -60,6 +61,7 @@ git clone -b main --depth 1 https://github.com/nikkinikki-org/OpenWrt-momo.git
 
 # daed
 git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-daed.git
+git clone https://github.com/QiuSimons/vmlinux-btf.git package/vmlinux-btf       #for dae
 
 popd
 
