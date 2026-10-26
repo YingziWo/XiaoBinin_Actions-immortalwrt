@@ -201,5 +201,14 @@ jobs:
       if: steps.tag.outputs.status == 'success' && !cancelled()
       with:
         tag_name: ${{ steps.tag.outputs.release_tag }}
-        body_path: release.txt
+        # body_path: release.txt                   #用了body_path,它优先于body，body的内容不会显示
         files: ${{ env.FIRMWARE }}/*
+        body: |
+          ===Firmware for x86_64===
+
+    - name: Delete workflow runs
+      uses: Mattraks/delete-workflow-runs@v2    #Mattraks/delete-workflow-runs@main
+      with:
+        retain_days: 6
+        keep_minimum_runs: 8
+
