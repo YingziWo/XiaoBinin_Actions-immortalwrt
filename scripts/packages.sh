@@ -61,7 +61,11 @@ git clone -b main --depth 1 https://github.com/nikkinikki-org/OpenWrt-momo.git
 
 # daed
 git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-daed.git
-git clone https://github.com/QiuSimons/vmlinux-btf.git package/vmlinux-btf       #for dae
+git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-dae.git
+git clone -b master --depth 1 https://github.com/QiuSimons/vmlinux-btf.git       #for dae
+
+# store
+git clone -b main --depthe 1 https://github.com/kenzok8/small-package/tree/main/luci-app-store.git
 
 popd
 
