@@ -126,8 +126,8 @@ jobs:
       run: |
         [ -d files ] && mv files openwrt/files || echo "files not found"
         [ -f $PLATFORM_FILE ] && cat $PLATFORM_FILE >> openwrt/.config
-        [ -f $CONFIG_FILE ] && cat $CONFIG_FILE >> openwrt/.config
-        [ -f $CONFIG_5G ] && cat $CONFIG_5G >> openwrt/.config
+        #[ -f $CONFIG_FILE ] && cat $CONFIG_FILE >> openwrt/.config
+        #[ -f $CONFIG_5G ] && cat $CONFIG_5G >> openwrt/.config
         chmod +x $RUST_SH && $RUST_SH
         cd openwrt
         chmod +x $GITHUB_WORKSPACE/$SETTINGS_SH && $GITHUB_WORKSPACE/$SETTINGS_SH
@@ -192,7 +192,7 @@ jobs:
       if: env.UPLOAD_RELEASE == 'true' && steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         VERSION1="${REPO_BRANCH#*-}"
-        echo -e "🎉 X86-64 平台\n✅ ${VERSION1} 源码\n❗️ ip地址 : 192.168.8.1" >> release.txt
+        echo -e "🎉 X86-64 平台\n✅ ${VERSION1} 源码\n❗️ ip地址 : 192.168.4.100" >> release.txt
         echo "release_tag=$(date +"%Y.%m.%d-${VERSION1}_X86-64")" >> $GITHUB_OUTPUT
         echo "status=success" >> $GITHUB_OUTPUT
 
@@ -201,10 +201,10 @@ jobs:
       if: steps.tag.outputs.status == 'success' && !cancelled()
       with:
         tag_name: ${{ steps.tag.outputs.release_tag }}
-        # body_path: release.txt                   #用了body_path,它优先于body，body的内容不会显示
+        body_path: release.txt                   #用了body_path,它优先于body，body的内容不会显示
         files: ${{ env.FIRMWARE }}/*
         body: |
-          ===Firmware for x86_64===
+          🎉===Firmware for x86_64===🎉
 
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@v2    #Mattraks/delete-workflow-runs@main
