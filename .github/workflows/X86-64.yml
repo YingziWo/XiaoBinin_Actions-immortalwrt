@@ -89,8 +89,8 @@ jobs:
 
     - name: 开启CCACHE配置
       run: |
-        echo 'CONFIG_DEVEL=y' >> openwrt/.config
-        echo 'CONFIG_CCACHE=y' >> openwrt/.config
+        #echo 'CONFIG_DEVEL=y' >> openwrt/.config
+        #echo 'CONFIG_CCACHE=y' >> openwrt/.config
 
     - name: 更新缓存
       run: |
@@ -139,8 +139,8 @@ jobs:
         cd openwrt
         make defconfig
         make download -j8 V=10
-        find dl -size -1024c -exec ls -l {} \;
-        find dl -size -1024c -exec rm -f {} \;
+        #find dl -size -1024c -exec ls -l {} \;
+        #find dl -size -1024c -exec rm -f {} \;
 
     - name: 空间使用情况（编译前）
       if: (!cancelled())
