@@ -146,7 +146,7 @@ jobs:
       run: |
         cd openwrt
         make defconfig
-        cp openwrt/.config openwrt/bin/targets/x86/64/defaultconfig.txt
+        cp .config ./bin/targets/x86/64/defaultconfig.txt
         make download -j8 V=10
         #find dl -size -1024c -exec ls -l {} \;
         #find dl -size -1024c -exec rm -f {} \;
