@@ -133,11 +133,20 @@ jobs:
         chmod +x $GITHUB_WORKSPACE/$PACKAGES_SH && $GITHUB_WORKSPACE/$PACKAGES_SH
         chmod +x $GITHUB_WORKSPACE/$INSTALL5G_SH && $GITHUB_WORKSPACE/$INSTALL5G_SH
         chmod +x $GITHUB_WORKSPACE/$CLASH_CORE_SH && $GITHUB_WORKSPACE/$CLASH_CORE_SH
+    
+    - name: Inject Kernel Configs
+      run: |
+        cd openwrt
+        sed -i '/CONFIG_XDP_SOCKETS/d' target/linux/x86/config-6.12
+        sed -i '/CONFIG_XDP_SOCKETS_DIAG/d' target/linux/x86/config-6.12
+        echo "CONFIG_XDP_SOCKETS=y" >> target/linux/x86/config-6.12
+        echo "CONFIG_XDP_SOCKETS_DIAG=y" >> target/linux/x86/config-6.12        
 
     - name: 下载文件
       run: |
         cd openwrt
         make defconfig
+        cp openwrt/.config openwrt/bin/targets/x86/64/defaultconfig.txt
         make download -j8 V=10
         #find dl -size -1024c -exec ls -l {} \;
         #find dl -size -1024c -exec rm -f {} \;
