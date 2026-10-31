@@ -68,7 +68,7 @@ git clone -b master --depth 1 https://github.com/QiuSimons/vmlinux-btf.git      
 git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-honk.git     #for honk 20261031
 
 # nikki
-git clone -b master --depth 1 https://github.com/nikkinikki-org/OpenWrt-nikki.git
+git clone -b main --depth 1 https://github.com/nikkinikki-org/OpenWrt-nikki.git
 
 popd
 pwd
