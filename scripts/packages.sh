@@ -85,6 +85,9 @@ git_sparse_clone main https://github.com/kenzok8/small-package luci-app-adguardh
 
 # store
 git_sparse_clone main https://github.com/kenzok8/small-package luci-app-store
+git_sparse_clone main https://github.com/kenzok8/small-package luci-lib-taskd
+git_sparse_clone main https://github.com/kenzok8/small-package luci-lib-xterm
+git_sparse_clone main https://github.com/kenzok8/small-package taskd
 
 #更换store插件名称
 sed -i 's/("iStore"),/("软件仓库"),/g' package/small/luci-app-store/luasrc/controller/store.lua
