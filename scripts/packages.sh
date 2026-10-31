@@ -65,8 +65,23 @@ git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-dae.git
 git clone -b master --depth 1 https://github.com/QiuSimons/vmlinux-btf.git       #for dae
 git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-honk.git     #for honk 20261031
 
+function git_sparse_clone() {
+ branch="$1" repourl="$2" && shift 2
+ git clone --depth=1 -b $branch --single-branch --filter=blob:none --sparse $repourl
+ repodir=$(echo $repourl | awk -F '/' '{print $(NF)}')
+ cd $repodir && git sparse-checkout set $@
+ mv -f $@ ../package/small
+ cd .. && rm -rf $repodir
+}
+
+#adguardhome
+git_sparse_clone main https://github.com/kenzok8/small-package luci-app-adguardhome  # 核查有260909
+
 # store
-git clone -b main --depthe 1 https://github.com/kenzok8/small-package/luci-app-store.git
+git_sparse_clone main https://github.com/kenzok8/small-package luci-app-store
+
+#更换store插件名称
+sed -i 's/("iStore"),/("软件仓库"),/g' package/small/luci-app-store/luasrc/controller/store.lua
 
 popd
 
