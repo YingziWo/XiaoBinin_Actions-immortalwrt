@@ -23,7 +23,7 @@ git clone -b master --depth 1 https://github.com/eamonxg/luci-theme-aurora.git
 git clone -b main --depth 1 https://github.com/sirpdboy/luci-app-timecontrol.git
 
 # adguardhome
-# git clone -b 2024.09.05 --depth 1 https://github.com/XiaoBinin/luci-app-adguardhome.git
+# git clone -b main --depth 1 https://github.com/XiaoBinin/luci-app-adguardhome.git
 
 # lucky
 git clone -b main --depth 1 https://github.com/gdy666/luci-app-lucky.git
@@ -63,9 +63,10 @@ git clone -b main --depth 1 https://github.com/nikkinikki-org/OpenWrt-momo.git
 git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-daed.git
 git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-dae.git
 git clone -b master --depth 1 https://github.com/QiuSimons/vmlinux-btf.git       #for dae
+git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-honk.git     #for honk 20261031
 
 # store
-git clone -b main --depthe 1 https://github.com/kenzok8/small-package/tree/main/luci-app-store.git
+git clone -b main --depthe 1 https://github.com/kenzok8/small-package/luci-app-store.git
 
 popd
 
