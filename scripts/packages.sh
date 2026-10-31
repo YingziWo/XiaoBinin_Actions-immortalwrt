@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 #删除feeds中的插件
 rm -rf feeds/packages/lang/golang
 rm -rf feeds/packages/net/{geoview,chinadns-ng,hysteria,mosdns,v2ray-geodata}
@@ -15,6 +15,8 @@ git clone --depth 1 https://github.com/acmel/dwarves -b v1.30 feeds/packages/dwa
 #克隆的源码放在small文件夹
 mkdir package/small
 pushd package/small
+pwd
+ls -lah
 
 # luci-theme-aurora
 git clone -b master --depth 1 https://github.com/eamonxg/luci-theme-aurora.git
@@ -65,6 +67,10 @@ git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-dae.git
 git clone -b master --depth 1 https://github.com/QiuSimons/vmlinux-btf.git       #for dae
 git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-honk.git     #for honk 20261031
 
+popd
+pwd
+ls -lah
+
 function git_sparse_clone() {
  branch="$1" repourl="$2" && shift 2
  git clone --depth=1 -b $branch --single-branch --filter=blob:none --sparse $repourl
@@ -83,6 +89,6 @@ git_sparse_clone main https://github.com/kenzok8/small-package luci-app-store
 #更换store插件名称
 sed -i 's/("iStore"),/("软件仓库"),/g' package/small/luci-app-store/luasrc/controller/store.lua
 
-popd
+
 
 echo "packages executed successfully!"
