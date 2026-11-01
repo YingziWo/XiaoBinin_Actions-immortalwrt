@@ -87,7 +87,7 @@ function git_sparse_clone() {
 git_sparse_clone main https://github.com/kenzok8/small-package luci-app-adguardhome  # 核查有260909
 
 # store
-git_sparse_clone main https://github.com/kenzok8/small-package luci-app-store
+#git_sparse_clone main https://github.com/kenzok8/small-package luci-app-store
 git_sparse_clone main https://github.com/kenzok8/small-package luci-lib-taskd
 git_sparse_clone main https://github.com/kenzok8/small-package luci-lib-xterm
 git_sparse_clone main https://github.com/kenzok8/small-package taskd
