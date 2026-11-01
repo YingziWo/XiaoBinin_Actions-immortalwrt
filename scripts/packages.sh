@@ -90,7 +90,7 @@ git_sparse_clone main https://github.com/kenzok8/small-package luci-lib-xterm
 git_sparse_clone main https://github.com/kenzok8/small-package taskd
 
 #更换store插件名称
-sed -i 's/("iStore"),/("软件仓库"),/g' package/small/luci-app-store/luasrc/controller/store.lua
+#sed -i 's/("iStore"),/("软件仓库"),/g' package/small/luci-app-store/luasrc/controller/store.lua    #20261101,luci-app-store已经dl到package/small目录下，固件生成没有iStore插件，系统软件包里也没有
 
 
 
