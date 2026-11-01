@@ -1,5 +1,8 @@
 #!/bin/bash
 set -x
+# Add a feed source
+sed -i "/helloworld/d" "feeds.conf.default"
+echo 'src-git istore https://github.com/linkease/istore;main' >> feeds.conf.default
 #删除feeds中的插件
 rm -rf feeds/packages/lang/golang
 rm -rf feeds/packages/net/{geoview,chinadns-ng,hysteria,mosdns,v2ray-geodata}
