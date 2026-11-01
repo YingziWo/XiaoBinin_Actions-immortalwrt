@@ -183,36 +183,34 @@ jobs:
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
-    - name: Compress openwrt directory including hidden files
-      run: |
-        # 使用 tar 打包整个目录，保留所有隐藏文件和权限
-        cd openwrt
-        pwd
-        ls -la
-        df -hT $PWD
-        #make clean
-        mkdir -p /home/runner/work/XiaoBinin_Actions-immortalwrt/XiaoBinin_Actions-immortalwrt/sorce-temp
-        pwd
-        ls -la
-        cd /home/runner/work/XiaoBinin_Actions-immortalwrt/XiaoBinin_Actions-immortalwrt/sorce-temp
-        df -hT $PWD
-        pwd
-        #tar -czvf /home/runner/work/XiaoBinin_Actions-immortalwrt/XiaoBinin_Actions-immortalwrt/sorce-temp/opewrtsrc.tar.gz /home/runner/work/XiaoBinin_Actions-immortalwrt/XiaoBinin_Actions-immortalwrt/openwrt/.  #这句能打包下openwrt目录下包含带.的和不带.目录和目录下所有文件内容，实际压缩包中含.的隐藏文件，但因为隐藏，在-v显示日志中不显示这些带.文件，但是这样写全目录路径也会一同把这么多的路径名称打进包里，解压时也会建立这么多的路径。
-        cd /home/runner/work/XiaoBinin_Actions-immortalwrt/XiaoBinin_Actions-immortalwrt/openwrt
-        tar --exclude='sorce-temp' -czvf /home/runner/work/XiaoBinin_Actions-immortalwrt/XiaoBinin_Actions-immortalwrt/sorce-temp/opewrtsrc.tar.gz ./.
-        cd /home/runner/work/XiaoBinin_Actions-immortalwrt/XiaoBinin_Actions-immortalwrt/sorce-temp
-        df -hT $PWD
-        pwd
-        ls -la
+    #- name: Compress openwrt directory including hidden files
+    #  run: |
+    #    # 使用 tar 打包整个目录，保留所有隐藏文件和权限
+    #    cd openwrt
+    #    pwd
+    #    ls -la
+    #    df -hT $PWD
+    #    mkdir -p /home/runner/work/XiaoBinin_Actions-immortalwrt/XiaoBinin_Actions-immortalwrt/sorce-temp
+    #    pwd
+    #    ls -la
+    #    cd /home/runner/work/XiaoBinin_Actions-immortalwrt/XiaoBinin_Actions-immortalwrt/sorce-temp
+    #    df -hT $PWD
+    #    pwd
+    #    cd /home/runner/work/XiaoBinin_Actions-immortalwrt/XiaoBinin_Actions-immortalwrt/openwrt
+    #    tar --exclude='sorce-temp' -czvf /home/runner/work/XiaoBinin_Actions-immortalwrt/XiaoBinin_Actions-immortalwrt/sorce-temp/opewrtsrc.tar.gz ./.
+    #    cd /home/runner/work/XiaoBinin_Actions-immortalwrt/XiaoBinin_Actions-immortalwrt/sorce-temp
+    #    df -hT $PWD
+    #    pwd
+    #    ls -la
         
 
         
-    - name: Upload openwrt directory to Artifacts
-      uses: actions/upload-artifact@v7
-      with:
-        name: ImmortalWrt-openwrt         # 附件上下载目录显示的文件名
-        path: /home/runner/work/XiaoBinin_Actions-immortalwrt/XiaoBinin_Actions-immortalwrt/sorce-temp       # 要上传的所有文件所在路径，该路径下的所有文件会压缩成一个文件zip文件传到附件区
-        retention-days: 7          
+    #- name: Upload openwrt directory to Artifacts
+    #  uses: actions/upload-artifact@v7
+    #  with:
+    #    name: ImmortalWrt-openwrt         # 附件上下载目录显示的文件名
+    #    path: /home/runner/work/XiaoBinin_Actions-immortalwrt/XiaoBinin_Actions-immortalwrt/sorce-temp       # 要上传的所有文件所在路径，该路径下的所有文件会压缩成一个文件zip文件传到附件区
+    #    retention-days: 7          
         
 
     - name: 空间使用情况（编译前）
