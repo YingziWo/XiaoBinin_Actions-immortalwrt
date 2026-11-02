@@ -68,52 +68,52 @@ jobs:
         git clone $REPO_URL --depth 1 -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
-        cd ./openwrt/ && echo "WRT_HASH=$(git log -1 --pretty=format:'%h')" >> $GITHUB_ENV
+        #cd ./openwrt/ && echo "WRT_HASH=$(git log -1 --pretty=format:'%h')" >> $GITHUB_ENV
 
         # GitHub Action 移除国内下载源
-        PROJECT_MIRRORS_FILE="./scripts/projectsmirrors.json"
-        if [ -f "$PROJECT_MIRRORS_FILE" ]; then
-          sed -i '/.cn\//d; /tencent/d; /aliyun/d' "$PROJECT_MIRRORS_FILE"
-        fi
+        #PROJECT_MIRRORS_FILE="./scripts/projectsmirrors.json"
+        #if [ -f "$PROJECT_MIRRORS_FILE" ]; then
+        #  sed -i '/.cn\//d; /tencent/d; /aliyun/d' "$PROJECT_MIRRORS_FILE"
+        #fi
 
-    - name: 检查缓存
-      id: check-cache
-      uses: actions/cache@main
-      with:
-        key: x86-${{env.REPO_BRANCH}}-${{env.WRT_HASH}}
-        restore-keys: x86-${{env.REPO_BRANCH}}
-        path: |
-          ./openwrt/.ccache
-          ./openwrt/staging_dir/host*
-          ./openwrt/staging_dir/tool*
+   # - name: 检查缓存
+     # id: check-cache
+     # uses: actions/cache@main
+      #with:
+        #key: x86-${{env.REPO_BRANCH}}-${{env.WRT_HASH}}
+        #restore-keys: x86-${{env.REPO_BRANCH}}
+       # path: |
+       #   ./openwrt/.ccache
+       #   ./openwrt/staging_dir/host*
+       #   ./openwrt/staging_dir/tool*
 
-    - name: 开启CCACHE配置
-      run: |
+    #- name: 开启CCACHE配置
+    #  run: |
         #echo 'CONFIG_DEVEL=y' >> openwrt/.config
         #echo 'CONFIG_CCACHE=y' >> openwrt/.config
 
-    - name: 更新缓存
-      run: |
-        if [ -d "./openwrt/staging_dir" ]; then
-          find "./openwrt/staging_dir" -type d -name "stamp" -not -path "*target*" | while read -r DIR; do
-            find "$DIR" -type f -exec touch {} +
-          done
+    #- name: 更新缓存
+    #  run: |
+    #    if [ -d "./openwrt/staging_dir" ]; then
+    #      find "./openwrt/staging_dir" -type d -name "stamp" -not -path "*target*" | while read -r DIR; do
+    #        find "$DIR" -type f -exec touch {} +
+    #      done
 
-          mkdir -p ./openwrt/tmp && echo "1" > ./openwrt/tmp/.build
+    #      mkdir -p ./openwrt/tmp && echo "1" > ./openwrt/tmp/.build
 
-          echo "toolchain skiped done!"
-        else
-          echo "caches missed!"
-        fi
+    #      echo "toolchain skiped done!"
+    #    else
+    #      echo "caches missed!"
+    #    fi
 
-        if ${{steps.check-cache.outputs.cache-hit != 'true'}}; then
-          CACHE_LIST=$(gh cache list --key "x86-$REPO_BRANCH" | cut -f 1)
-          for CACHE_KEY in $CACHE_LIST; do
-            gh cache delete $CACHE_KEY
-          done
+    #    if ${{steps.check-cache.outputs.cache-hit != 'true'}}; then
+    #      CACHE_LIST=$(gh cache list --key "x86-$REPO_BRANCH" | cut -f 1)
+    #      for CACHE_KEY in $CACHE_LIST; do
+    #        gh cache delete $CACHE_KEY
+    #      done
 
-          echo "caches cleanup done!"
-        fi
+    #      echo "caches cleanup done!"
+    #    fi
 
     - name: 安装 feeds
       run: |
@@ -131,8 +131,9 @@ jobs:
         cd openwrt
         chmod +x $GITHUB_WORKSPACE/$SETTINGS_SH && $GITHUB_WORKSPACE/$SETTINGS_SH
         chmod +x $GITHUB_WORKSPACE/$PACKAGES_SH && $GITHUB_WORKSPACE/$PACKAGES_SH
-        chmod +x $GITHUB_WORKSPACE/$INSTALL5G_SH && $GITHUB_WORKSPACE/$INSTALL5G_SH
         chmod +x $GITHUB_WORKSPACE/$CLASH_CORE_SH && $GITHUB_WORKSPACE/$CLASH_CORE_SH
+       # chmod +x $GITHUB_WORKSPACE/$INSTALL5G_SH && $GITHUB_WORKSPACE/$INSTALL5G_SH
+        
     
     - name: Inject Kernel Configs
       run: |
@@ -180,8 +181,8 @@ jobs:
         make defconfig
         cat .config 
         make download -j8 V=10
-        find dl -size -1024c -exec ls -l {} \;
-        find dl -size -1024c -exec rm -f {} \;
+        #find dl -size -1024c -exec ls -l {} \;
+        #find dl -size -1024c -exec rm -f {} \;
 
     #- name: Compress openwrt directory including hidden files
     #  run: |
