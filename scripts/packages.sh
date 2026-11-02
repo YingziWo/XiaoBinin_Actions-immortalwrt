@@ -2,7 +2,8 @@
 set -x
 # Add a feed source
 sed -i "/helloworld/d" "feeds.conf.default"
-echo 'src-git istore https://github.com/linkease/istore;main' >> feeds.conf.default
+echo 'src-git istore https://github.com/linkease/istore' >> feeds.conf.default
+
 #删除feeds中的插件
 rm -rf feeds/packages/lang/golang
 rm -rf feeds/packages/net/{geoview,chinadns-ng,hysteria,mosdns,v2ray-geodata}
@@ -29,6 +30,7 @@ git clone -b main --depth 1 https://github.com/sirpdboy/luci-app-timecontrol.git
 
 # adguardhome
 # git clone -b main --depth 1 https://github.com/XiaoBinin/luci-app-adguardhome.git
+git clone -b main --depth 1 https://github.com/AdguardTeam/AdGuardHome.git
 
 # lucky
 git clone -b main --depth 1 https://github.com/gdy666/luci-app-lucky.git
@@ -87,7 +89,7 @@ function git_sparse_clone() {
 git_sparse_clone main https://github.com/kenzok8/small-package luci-app-adguardhome  # 核查有260909
 
 # store
-#git_sparse_clone main https://github.com/kenzok8/small-package luci-app-store
+git_sparse_clone main https://github.com/kenzok8/small-package luci-app-store
 git_sparse_clone main https://github.com/kenzok8/small-package luci-lib-taskd
 git_sparse_clone main https://github.com/kenzok8/small-package luci-lib-xterm
 git_sparse_clone main https://github.com/kenzok8/small-package taskd
