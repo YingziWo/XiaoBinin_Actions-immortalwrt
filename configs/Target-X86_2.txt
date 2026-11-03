@@ -83,6 +83,10 @@ CONFIG_PACKAGE_luci-app-ssr-plus=y
 #20260928 MosDNS
 CONFIG_PACKAGE_luci-app-mosdns=y
 
+#20261103 SmartDNS
+CONFIG_PACKAGE_luci-app-SmartDNS=y
+CONFIG_PACKAGE_luci-app-AdGuardHome=y
+
 #=============================== luci end ===================================#
 
 #=============================  Dependencies ================================#
