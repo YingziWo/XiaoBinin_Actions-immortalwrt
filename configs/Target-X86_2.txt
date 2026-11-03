@@ -126,6 +126,20 @@ CONFIG_PACKAGE_kmod-veth=y
 CONFIG_PACKAGE_kmod-ipt-fullconenat=y
 CONFIG_PACKAGE_kmod-ipt-conntrack=y
 
+#20261103 for docker 编入固件界面，由于docker工作在fw3，界面出现后必须禁用docker的fw3，去改dockerd和daemon.json文件实现，同时修改firewall防火墙文件放行docker到lan和wan的通路。
+CONFIG_DOCKER_CGROUP_OPTIONS=y
+CONFIG_DOCKER_NET_MACVLAN=y
+CONFIG_DOCKER_OPTIONAL_FEATURES=y
+CONFIG_DOCKER_STO_EXT4=y
+
+CONFIG_PACKAGE_docker=y
+CONFIG_PACKAGE_dockerd=y
+
+CONFIG_PACKAGE_luci-app-dockerman=y
+CONFIG_PACKAGE_luci-i18n-dockerman-zh-cn=y
+CONFIG_PACKAGE_luci-lib-docker=y
+
+
 #20260930 for Open-Box
 CONFIG_PACKAGE_kmod-nft-queue=y
 
