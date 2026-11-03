@@ -70,18 +70,20 @@ git clone -b main --depth 1 https://github.com/nikkinikki-org/OpenWrt-momo.git
 git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-daed.git
 git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-dae.git
 git clone -b master --depth 1 https://github.com/QiuSimons/vmlinux-btf.git       #for dae
-git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-honk.git     #for honk 20261031
+#git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-honk.git     #for honk 20261031 #20261103在增加了.config的smartdns和AdGuardHome后，这个就编译失败，将它放在下面的克隆项中看看结果
 
 popd
 pwd
 ls -lah
 
+mkdir package/small-2
+pushd package/small-2
 function git_sparse_clone() {
  branch="$1" repourl="$2" && shift 2
  git clone --depth=1 -b $branch --single-branch --filter=blob:none --sparse $repourl
  repodir=$(echo $repourl | awk -F '/' '{print $(NF)}')
  cd $repodir && git sparse-checkout set $@
- mv -f $@ ../package/small
+ mv -f $@ ../package/small-2
  cd .. && rm -rf $repodir
 }
 
@@ -94,9 +96,13 @@ git_sparse_clone main https://github.com/kenzok8/small-package luci-lib-taskd
 git_sparse_clone main https://github.com/kenzok8/small-package luci-lib-xterm
 git_sparse_clone main https://github.com/kenzok8/small-package taskd
 
+# honk
+git_sparse_clone main https://github.com/kenzok8/small-package luci-lib-honk
+git_sparse_clone main https://github.com/kenzok8/small-package honk
+
 #更换store插件名称
 #sed -i 's/("iStore"),/("软件仓库"),/g' package/small/luci-app-store/luasrc/controller/store.lua    #20261101,luci-app-store已经dl到package/small目录下，固件生成没有iStore插件，系统软件包里也没有
 
-
+popd
 
 echo "packages executed successfully!"
