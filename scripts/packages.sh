@@ -67,10 +67,10 @@ git clone -b main --depth 1 https://github.com/nikkinikki-org/OpenWrt-nikki.git
 git clone -b main --depth 1 https://github.com/nikkinikki-org/OpenWrt-momo.git
 
 # daed
-git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-daed.git
-git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-dae.git
+git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-daed.git        #for honk 20261031 #20261103在增加了.config的smartdns和AdGuardHome后，这个就编译失败，将它放在下面的克隆项中看看结果
+git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-dae.git         #for honk 20261031 #20261103在增加了.config的smartdns和AdGuardHome后，这个就编译失败，将它放在下面的克隆项中看看结果
 git clone -b master --depth 1 https://github.com/QiuSimons/vmlinux-btf.git       #for dae
-#git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-honk.git     #for honk 20261031 #20261103在增加了.config的smartdns和AdGuardHome后，这个就编译失败，将它放在下面的克隆项中看看结果
+#git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-honk.git    #for honk 20261031 #20261103在增加了.config的smartdns和AdGuardHome后，这个就编译失败，将它放在下面的克隆项中看看结果
 
 popd
 pwd
@@ -96,9 +96,16 @@ git_sparse_clone main https://github.com/kenzok8/small-package luci-lib-taskd
 git_sparse_clone main https://github.com/kenzok8/small-package luci-lib-xterm
 git_sparse_clone main https://github.com/kenzok8/small-package taskd
 
-# honk
-git_sparse_clone main https://github.com/kenzok8/small-package luci-lib-honk
-git_sparse_clone main https://github.com/kenzok8/small-package honk
+# honk #20261103,包括dae和daed在增加了.config的smartdns和AdGuardHome后，未加入这两个配置时，编译成功，但加入后上面语句到编译环境中失败，将它放在下面拆成两部分后再看编译结果是否能通过
+#git_sparse_clone main https://github.com/kenzok8/small-package luci-lib-honk
+#git_sparse_clone main https://github.com/kenzok8/small-package honk
+git_sparse_clone kix https://github.com/QiuSimons/luci-app-daed daed
+git_sparse_clone kix https://github.com/QiuSimons/luci-app-daed luci-app-daed
+git_sparse_clone kix https://github.com/QiuSimons/luci-app-dae dae
+git_sparse_clone kix https://github.com/QiuSimons/luci-app-dae luci-app-dae
+git_sparse_clone master https://github.com/QiuSimons/luci-app-honk honk
+git_sparse_clone master https://github.com/QiuSimons/luci-app-honk luci-app-honk
+
 
 #更换store插件名称
 #sed -i 's/("iStore"),/("软件仓库"),/g' package/small/luci-app-store/luasrc/controller/store.lua    #20261101,luci-app-store已经dl到package/small目录下，固件生成没有iStore插件，系统软件包里也没有
