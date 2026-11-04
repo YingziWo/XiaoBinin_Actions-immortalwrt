@@ -1,4 +1,9 @@
-# Target Config                     #20261104， #开启docker和smartdns插件编译后，honk似乎不能编译进固件中；#20261104,在开启编译dae、daed、honk插件，编译不进，但固件成品支持手动安装istore软件仓库； #20261104,在开启编译dae、daed、honk插件，ssr+编译不进
+#20261104， 
+#开启docker和smartdns插件编译后，honk似乎不能编译进固件中
+#20261104,在开启编译dae、daed、honk插件，编译不进，但固件成品支持手动安装istore软件仓库； 
+#20261104,在开启编译dae、daed、honk插件，ssr+编译不进
+
+# Target Config                    
 CONFIG_TARGET_x86=y
 CONFIG_TARGET_x86_64=y
 CONFIG_TARGET_x86_64_DEVICE_generic=y
@@ -74,7 +79,6 @@ CONFIG_PACKAGE_luci-app-honk=y
 
 # 20260924
 CONFIG_PACKAGE_luci-app-acme=y
-CONFIG_PACKAGE_adguardhome=y
 CONFIG_PACKAGE_luci-app-nikki=y
 CONFIG_PACKAGE_luci-app-openclash=y
 CONFIG_PACKAGE_luci-app-passwall=y
