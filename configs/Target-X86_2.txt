@@ -1,8 +1,3 @@
-#20261104， 
-#开启docker和smartdns插件编译后，honk似乎不能编译进固件中
-#20261104,在开启编译dae、daed、honk插件，编译不进，但固件成品支持手动安装istore软件仓库； 
-#20261104,在开启编译dae、daed、honk插件，ssr+编译不进
-
 # Target Config                    
 CONFIG_TARGET_x86=y
 CONFIG_TARGET_x86_64=y
