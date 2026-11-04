@@ -263,7 +263,7 @@ jobs:
       if: env.UPLOAD_RELEASE == 'true' && steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         VERSION1="${REPO_BRANCH#*-}"
-        echo -e "🎉 X86-64 平台\n✅ ${VERSION1} 源码\n❗️ ip地址 : 192.168.4.100" >> release.txt
+        echo -e "🎉 X86-64 平台\n✅ ${VERSION1} 源码\n❗️ ip地址 : 192.168.4.100 \n📒 固件包含Docker，本固件的防火墙工作在fw4与docker的fw3冲突，关闭docker的fw3步骤：\n📒1、修改/etc/config/dockerd文件中的option iptables '1'到option iptables '0' \n📒2、若有/etc/docker/daemon.json文件，在该文件的{}内，加下面字段：\n📒"iptables": false,"ip6tables": false \n📒3、在/etc/config/firewall防火墙fw4文件末尾加入：\n config forwarding \n    option src 'lan' \n    option dest 'docker' \n config forwarding \n        option src 'docker' \n        option dest 'wan' \n📒4、整机重新启动后，docker的fw3关闭，fw4开放docker。\n🚀插件：mosDNS、dae、Homeproxy、Nikki、openclash、Passwall等 \n🚀插件：含smartDNS安装包、支持iStore软件仓库手动安装" >> release.txt
         echo "release_tag=$(date +"%Y.%m.%d-${VERSION1}_X86-64")" >> $GITHUB_OUTPUT
         echo "status=success" >> $GITHUB_OUTPUT
 
